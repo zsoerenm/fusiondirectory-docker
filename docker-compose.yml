@@ -1,0 +1,55 @@
+# Docker compose
+#
+# (C) 2018 Soeren Zorn
+#
+
+version: "2"
+services:
+
+  web:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - fusiondirectory-web-data:/var/www/html:ro
+      - ./config/fusiondirectory-nginx.conf:/etc/nginx/conf.d/00_fusiondirectory.conf:ro
+#      - ./keys/nginx:/etc/nginx/certs:ro
+#      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - fusiondirectory
+
+  openldap:
+    build:
+      context: ./openldap
+      args: &plugin_list
+        PLUGIN_LIST: "autofs,posix,quota,ldapdump,ldapmanager,mixedgroups,ssh,systems,mail,user-reminder,sudo"
+    restart: always
+    environment:
+      LDAP_ORGANISATION: "Organisation"
+      LDAP_DOMAIN: "example.org"
+      LDAP_ADMIN_PASSWORD: "somegoodpassword"
+      LDAP_RFC2307BIS_SCHEMA: "true"
+#      LDAP_TLS_VERIFY_CLIENT: "try"
+#      LDAP_TLS_CRT_FILENAME: "cert-ldap.crt"
+#      LDAP_TLS_KEY_FILENAME: "private_ldap.key"
+#      LDAP_TLS_CA_CRT_FILENAME: "RWTH-CA-chain.pem"
+    volumes:
+      - ./data/ldap/data:/var/lib/ldap
+      - ./data/ldap/config:/etc/ldap/slapd.d
+#      - ./keys/ldap:/container/service/slapd/assets/certs/
+    ports:
+      - "636:636"
+
+  fusiondirectory:
+    build:
+      context: ./fusiondirectory
+      args: *plugin_list
+    restart: always
+    volumes:
+      - fusiondirectory-web-data:/var/www/html
+      - ./data/fusiondirectory:/etc/fusiondirectory
+
+volumes:
+    fusiondirectory-web-data:
