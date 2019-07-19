@@ -1,6 +1,18 @@
 FROM php:7.2-fpm-stretch
 
-LABEL maintainer="soeren.zorn@nav.rwth-aachen.de"
+ARG COMMIT="local-build"
+ARG DATE="1970-01-01T00:00:00Z"
+ARG URL="https://github.com/zsoerenm/fusiondirectory-docker"
+ARG VERSION="dirty"
+
+LABEL org.label-schema.schema-version="1.0" \
+    org.label-schema.build-date=$DATE \
+    org.label-schema.vendor="Soeren Zorn" \
+    org.label-schema.name="zsoerenm/fusiondirectory-php" \
+    org.label-schema.description="A PHP container with Fusiondirectory" \
+    org.label-schema.version="$VERSION" \
+    org.label-schema.vcs-url=$URL \
+    org.label-schema.vcs-ref=$COMMIT
 
 ENV FUSIONDIRECTORY_VERSION=1.3 \
   SCHEMA2LDIF_VERSION=1.3 \

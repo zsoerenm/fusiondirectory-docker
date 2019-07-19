@@ -2,6 +2,14 @@
 
 A composition of Docker containers to run Fusiondirectory.
 
+By default it supports the following plugins: autofs,posix,quota,ldapdump,ldapmanager,mixedgroups,ssh,systems,mail,user-reminder,sudo
+If you'd like to add or use other plugins, you will have to rebuild the images with the build argument PLUGIN_LIST that includes a comma seperated list of plugins.
+Example:
+```shell
+docker build -t fusiondirectory-php --build-arg PLUGIN_LIST=autofs,quota ./fusiondirectory/
+docker build -t fusiondirectory-openldap --build-arg PLUGIN_LIST=autofs,quota ./openldap/
+```
+
 ## Features
 
 - Use official containers if possible

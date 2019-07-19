@@ -21,10 +21,7 @@ services:
       - fusiondirectory
 
   openldap:
-    build:
-      context: ./openldap
-      args: &plugin_list
-        PLUGIN_LIST: "autofs,posix,quota,ldapdump,ldapmanager,mixedgroups,ssh,systems,mail,user-reminder,sudo"
+    image: zsoerenm:fusiondirectory-openldap
     restart: always
     environment:
       LDAP_ORGANISATION: "Organisation"
@@ -34,7 +31,7 @@ services:
 #      LDAP_TLS_VERIFY_CLIENT: "try"
 #      LDAP_TLS_CRT_FILENAME: "cert-ldap.crt"
 #      LDAP_TLS_KEY_FILENAME: "private_ldap.key"
-#      LDAP_TLS_CA_CRT_FILENAME: "RWTH-CA-chain.pem"
+#      LDAP_TLS_CA_CRT_FILENAME: "chain.pem"
     volumes:
       - ./data/ldap/data:/var/lib/ldap
       - ./data/ldap/config:/etc/ldap/slapd.d
@@ -43,9 +40,7 @@ services:
       - "636:636"
 
   fusiondirectory:
-    build:
-      context: ./fusiondirectory
-      args: *plugin_list
+    image: zsoerenm:fusiondirectory-php
     restart: always
     volumes:
       - fusiondirectory-web-data:/var/www/html
