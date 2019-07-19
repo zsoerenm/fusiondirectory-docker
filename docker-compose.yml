@@ -21,7 +21,7 @@ services:
       - fusiondirectory
 
   openldap:
-    image: zsoerenm:fusiondirectory-openldap
+    image: zsoerenm/fusiondirectory-openldap
     restart: always
     environment:
       LDAP_ORGANISATION: "Organisation"
@@ -40,7 +40,7 @@ services:
       - "636:636"
 
   fusiondirectory:
-    image: zsoerenm:fusiondirectory-php
+    image: zsoerenm/fusiondirectory-php
     restart: always
     volumes:
       - fusiondirectory-web-data:/var/www/html
