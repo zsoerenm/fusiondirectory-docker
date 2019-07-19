@@ -14,7 +14,7 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vcs-url=$URL \
     org.label-schema.vcs-ref=$COMMIT
 
-ENV FUSIONDIRECTORY_VERSION=1.3 \
+ENV FUSIONDIRECTORY_VERSION=1.2 \
   SCHEMA2LDIF_VERSION=1.3 \
   SMARTY_VERSION=3.1.31 \
   SMARTYGETTEXT_VERSION=1.5.1
