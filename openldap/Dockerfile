@@ -14,7 +14,7 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vcs-url=$URL \
     org.label-schema.vcs-ref=$COMMIT
 
-ENV FUSIONDIRECTORY_VERSION=1.2
+ENV FUSIONDIRECTORY_VERSION=1.3
 ENV FUSIONDIRECTORY_KEY=D744D55EACDA69FF
 
 RUN rm -f /etc/dpkg/dpkg.cfg.d/01_nodoc
