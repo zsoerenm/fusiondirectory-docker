@@ -37,7 +37,7 @@ and head to `http://localhost/`.
 If you visit fusiondirectory first, it will guide you through the installation procedure. During the installation procedure you will need to change files in the docker image. To do that exec into the running image with
 
 ```shell
-docker-compose exec -it fusiondirectory bash
+docker exec -it <fusiondirectory_container> bash
 ```
 and do whatever you are advised to do.
 
